@@ -79,7 +79,6 @@ class UserLogsActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab) {
             }
         })
-
     }
 
     private fun replaceFragment(fragment: Fragment) {
