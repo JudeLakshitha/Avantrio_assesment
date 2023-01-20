@@ -1,0 +1,6 @@
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- set image to be shown on circular ImageView -->
+    <item android:drawable="@drawable/ic_launcher_background"/>
+    <item android:drawable="@drawable/profile_circle_shape"/>
+</layer-list>
