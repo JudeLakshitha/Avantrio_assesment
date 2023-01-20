@@ -30,14 +30,12 @@ class UserAdapter(var context: Context, itemList: ArrayList<User>) : BaseAdapter
         val view: View?
         val vh: ViewHolder
 
-
         if (convertView == null) {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.item_user, parent, false)
             vh = ViewHolder(view)
             view.tag = vh
-
 
         } else {
             view = convertView
@@ -50,10 +48,8 @@ class UserAdapter(var context: Context, itemList: ArrayList<User>) : BaseAdapter
             val name = itemObj.name
             val letter = itemObj.letter
 
-
             if (name !== "") {
                 vh.tvName.text = name
-
             } else {
                 vh.tvName.text = "unknown"
             }
@@ -72,14 +68,12 @@ class UserAdapter(var context: Context, itemList: ArrayList<User>) : BaseAdapter
             vh.tvLetter.background = draw
         }
 
-
         vh.ivSubMenu.setOnClickListener {
             val wrapper: Context = ContextThemeWrapper(context, R.style.ThemePopUpMenu)
             val popupMenu = PopupMenu(wrapper, vh.ivSubMenu)
             popupMenu.menuInflater.inflate(R.menu.popup_menu, popupMenu.menu)
             popupMenu.show()
         }
-
 
         return view!!
 

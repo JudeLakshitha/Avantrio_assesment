@@ -147,7 +147,6 @@ class UsersFragment : Fragment() {
 
             }) {
                 override fun getHeaders(): Map<String, String> {
-                    Log.d("dddddddddddddddd", "token " + token);
                     val headers: MutableMap<String, String> = HashMap()
                     headers["Authorization"] = "Bearer $token"
                     return headers
@@ -192,6 +191,7 @@ class UsersFragment : Fragment() {
                         val user = User()
                         user.name = mStringFilterList[i].name
                         user.id = mStringFilterList[i].id
+                        user.letter = mStringFilterList[i].letter
                         filterList.add(user)
 
                     }
@@ -209,7 +209,7 @@ class UsersFragment : Fragment() {
         }
 
         filteredDataList = results
-        userAdapter = UserAdapter(requireContext(), results)
+        userAdapter = UserAdapter(requireContext(), filteredDataList)
         userListView.adapter = userAdapter
         userAdapter.notifyDataSetChanged()
 
