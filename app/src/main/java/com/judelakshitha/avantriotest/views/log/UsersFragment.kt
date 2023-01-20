@@ -37,7 +37,6 @@ class UsersFragment : Fragment() {
     var usersArrayList = ArrayList<User>()
     var filteredDataList = ArrayList<User>()
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -81,21 +80,16 @@ class UsersFragment : Fragment() {
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
-
         }
-
         return customView
     }
 
     private fun getUsers() {
-
         responseArrayList.clear()
         val url = "http://apps.avantrio.xyz:8010/api/users"
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
         val request: JsonArrayRequest =
             object : JsonArrayRequest(Method.GET, url, null, Response.Listener { response ->
-                Log.i("onResponse", response.toString())
-                Log.i("onResponse", response.length().toString());
 
                 try {
                     for (i in 0 until response.length()) {
@@ -107,7 +101,6 @@ class UsersFragment : Fragment() {
                             .uppercase()
                         responseArrayList.add(userObj)
                     }
-
                     try {
                         usersArrayList = responseArrayList
                         userAdapter = UserAdapter(requireContext(), usersArrayList)
@@ -121,25 +114,21 @@ class UsersFragment : Fragment() {
                     e.printStackTrace()
                 }
 
-
             }, Response.ErrorListener { error ->
 
                 Log.e("onErrorResponse", error.toString())
                 var errorMessage = ""
                 if (error is NetworkError) {
                     errorMessage = "Cannot connect to Service.\nPlease check your \nconnection!"
-
                 } else if (error is ServerError) {
                     errorMessage =
                         "Server could not \nbe found. Please try again \nafter some time!"
-
                 } else if (error is AuthFailureError) {
-                    errorMessage = "Authentication Fail!"
+                    errorMessage = "Authentication Fail\n Login again!"
                     CommonHelper().clearSharedPref(requireContext(), "logPref")
                     val intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
-
                 } else {
                     errorMessage = "Service is not working.\nPlease try again!"
                 }
@@ -147,12 +136,10 @@ class UsersFragment : Fragment() {
 
             }) {
                 override fun getHeaders(): Map<String, String> {
-                    Log.d("dddddddddddddddd", "token " + token);
                     val headers: MutableMap<String, String> = HashMap()
                     headers["Authorization"] = "Bearer $token"
                     return headers
                 }
-
                 override fun parseNetworkResponse(response: NetworkResponse?): Response<JSONArray>? {
                     if (response != null) {
                         if (response.statusCode != 200) {
@@ -184,7 +171,6 @@ class UsersFragment : Fragment() {
             for (i in 0 until mStringFilterList.size) {
                 var userName = ""
                 userName = constraint[0].toString()
-
                 if (userName != "") {
                     if (mStringFilterList[i].name.lowercase(Locale.getDefault())
                             .contains(userName.lowercase(Locale.getDefault()))
@@ -193,28 +179,19 @@ class UsersFragment : Fragment() {
                         user.name = mStringFilterList[i].name
                         user.id = mStringFilterList[i].id
                         filterList.add(user)
-
                     }
-
                 } else {
                     filterList = mStringFilterList
                 }
-
             }
-
             results = filterList
-
         } else {
             results = usersArrayList
         }
-
         filteredDataList = results
         userAdapter = UserAdapter(requireContext(), results)
         userListView.adapter = userAdapter
         userAdapter.notifyDataSetChanged()
-
     }
-
-
 }
 

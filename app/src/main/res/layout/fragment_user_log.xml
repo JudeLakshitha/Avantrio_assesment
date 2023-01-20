@@ -8,54 +8,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border"
         android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:background="@drawable/border"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/ll_user_log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="4"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Date"
                 android:textColor="@color/black"
-                android:text="Date"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Time"
                 android:textColor="@color/black"
-                android:text="Time"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Alert View"
                 android:textColor="@color/black"
-                android:text="Alert View"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="Location"
                 android:textColor="@color/black"
-                android:text="Location"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -68,9 +68,9 @@
             android:divider="@null"
             android:dividerHeight="5dp"
             android:focusable="auto"
+            android:overScrollMode="never"
             android:scrollbarStyle="insideOverlay"
-            android:scrollbarThumbVertical="@color/theme_color"
-            android:overScrollMode="never"/>
+            android:scrollbarThumbVertical="@color/theme_color" />
 
     </LinearLayout>
 

@@ -29,16 +29,13 @@ class UserLogFragment : Fragment() {
 
     lateinit var userLogAdapter: UserLogsAdapter
     lateinit var userLogListView: ListView
-
     var responseArrayList = ArrayList<UserLog>()
     var token = ""
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val customView = layoutInflater.inflate(R.layout.fragment_user_log, null)
-
         userLogListView = customView.findViewById(R.id.lv_log_items)
 
         val appSharedData =
@@ -48,11 +45,9 @@ class UserLogFragment : Fragment() {
         getLogDetails()
 
         return customView
-
     }
 
     private fun getLogDetails() {
-
         responseArrayList.clear()
         val url = "http://apps.avantrio.xyz:8010/api/user/${userId}/logs"
         val requestQueue: RequestQueue = Volley.newRequestQueue(context)
@@ -62,12 +57,9 @@ class UserLogFragment : Fragment() {
 
         val request: JsonObjectRequest = object :
             JsonObjectRequest(Method.GET, url, jsonTokenObj, Response.Listener { response ->
-
-                val userId = response.getString("user_id")
-                val userName = response.getString("user")
-
+                /* val userId = response.getString("user_id")
+                 val userName = response.getString("user")*/
                 try {
-
                     val responseArray = response.getJSONArray("logs")
 
                     for (i in 0 until responseArray.length()) {
@@ -77,8 +69,8 @@ class UserLogFragment : Fragment() {
                         val time = logObj.getString("time")
                         val long = logObj.getString("longitude")
                         val lat = logObj.getString("latitude")
-
                         val logModelObj = UserLog()
+
                         logModelObj.id = id.toInt()
                         logModelObj.dateString = date
                         logModelObj.timeString = time
@@ -86,9 +78,7 @@ class UserLogFragment : Fragment() {
                         logModelObj.longitude = long.toDouble()
 
                         responseArrayList.add(logModelObj)
-
                     }
-
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -102,18 +92,15 @@ class UserLogFragment : Fragment() {
                 var errorMessage = ""
                 if (error is NetworkError) {
                     errorMessage = "Cannot connect to Service.\nPlease check your \nconnection!"
-
                 } else if (error is ServerError) {
                     errorMessage =
                         "Server could not \nbe found. Please try again \nafter some time!"
-
                 } else if (error is AuthFailureError) {
                     errorMessage = "Authentication Fail!"
                     CommonHelper().clearSharedPref(requireContext(), "logPref")
                     val intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
-
                 } else {
                     errorMessage = "Service is not working.\nPlease try again!"
                 }
@@ -121,7 +108,6 @@ class UserLogFragment : Fragment() {
 
             }) {
             override fun getHeaders(): Map<String, String> {
-
                 val headers: MutableMap<String, String> = HashMap()
                 headers["Authorization"] = "Bearer $token"
                 return headers

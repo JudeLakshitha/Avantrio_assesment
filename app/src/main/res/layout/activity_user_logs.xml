@@ -27,7 +27,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/log_toolbar"
                     android:layout_width="match_parent"
@@ -35,13 +34,12 @@
 
                 <TextView
                     android:id="@+id/tv_user_name"
-                    android:text="name"
-                    android:textSize="25sp"
-                    android:padding="10dp"
-                    android:layout_marginStart="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:padding="10dp"
+                    android:text="name"
+                    android:textSize="25sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -54,15 +52,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:tabIndicatorColor="#FF114A"
-                        app:tabIndicatorHeight="2dp"
-                        app:tabTextAppearance="@style/TabLayoutTextAppearance"
-                        app:tabMode="fixed"
                         app:tabIndicatorFullWidth="false"
+                        app:tabIndicatorHeight="2dp"
+                        app:tabMode="fixed"
+                        app:tabRippleColor="@null"
                         app:tabSelectedTextColor="#FF114A"
-                        app:tabRippleColor="@null">
+                        app:tabTextAppearance="@style/TabLayoutTextAppearance">
 
                     </com.google.android.material.tabs.TabLayout>
-
 
                     <LinearLayout
                         android:id="@+id/tab_linear"
@@ -72,13 +69,9 @@
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
                 </LinearLayout>
-
-
             </LinearLayout>
-
         </androidx.drawerlayout.widget.DrawerLayout>
     </FrameLayout>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

@@ -2,6 +2,7 @@ package com.judelakshitha.avantriotest.views.login
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -34,10 +35,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var toolbar: Toolbar
-
     private var username = ""
     private var password = ""
-
+    var storedToken = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +57,14 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowCustomEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        val logPref = getSharedPreferences("logPref", MODE_PRIVATE)
+        storedToken = logPref.getString("token", "")!!
+
+        if (storedToken.isNotEmpty()){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         btnLogin.setOnClickListener {
             username = etuserName.text.toString()
@@ -67,8 +75,8 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "username & password cannot empty", Toast.LENGTH_SHORT).show()
             }
-
         }
+
     }
 
     private fun loginValidation() {
@@ -81,15 +89,13 @@ class LoginActivity : AppCompatActivity() {
             start()
         }
 
-        loginObj.put("username", etuserName.text.toString())
-        loginObj.put("password", etPassword.text.toString())
+        loginObj.put("username", username)
+        loginObj.put("password", password)
 
         val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, loginObj, { response ->
-
             try {
                 val accessToken = response.getString("token")
-
-                val sharedPref = applicationContext.getSharedPreferences("logPref", MODE_PRIVATE)
+                val sharedPref = getSharedPreferences("logPref", MODE_PRIVATE)
                 val editor = sharedPref.edit()
                 editor.putString("token", accessToken)
                 editor.apply()
@@ -99,23 +105,16 @@ class LoginActivity : AppCompatActivity() {
                 finish()
                 Toast.makeText(applicationContext, "Login Successful", Toast.LENGTH_SHORT).show()
 
-
             } catch (e: Exception) {
                 e.printStackTrace()
-
             }
-
         },
             { error ->
                 val errorMessage = CommonHelper().VolleyErrorMsg(error)
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-
             }
-
         )
-
         requestQueue.add(jsonObjectRequest)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -16,11 +16,9 @@ import com.judelakshitha.avantriotest.views.login.LoginActivity
 
 class HomeActivity : AppCompatActivity() {
 
-
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var toolBar: androidx.appcompat.widget.Toolbar
     var token = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
 
         supportActionBar!!.customView = mCustomView
         supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         val appSharedData = getSharedPreferences("logPref", Context.MODE_PRIVATE)
         token = appSharedData.getString("token", "")!!
@@ -49,7 +47,6 @@ class HomeActivity : AppCompatActivity() {
         bottomNavigationView.menu.findItem(R.id.item_home).isEnabled = false
         bottomNavigationView.menu.findItem(R.id.item_settings).isEnabled = false
         bottomNavigationView.selectedItemId = R.id.item_users
-
     }
 
     private fun setCurrentFragment(fragment: Fragment) =
