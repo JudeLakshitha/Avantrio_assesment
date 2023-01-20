@@ -27,7 +27,6 @@ class UserLogsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_user_logs)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
@@ -53,7 +52,6 @@ class UserLogsActivity : AppCompatActivity() {
         userId = intent.getStringExtra("id").toString()
         val userName = intent.getStringExtra("userName").toString()
 
-
         tvUserName.text = userName
         tabLayout.addTab(tabLayout.newTab().setText("All"))
         tabLayout.addTab(tabLayout.newTab().setText("Location"))
@@ -76,18 +74,15 @@ class UserLogsActivity : AppCompatActivity() {
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
-
             }
         })
 
     }
 
     private fun replaceFragment(fragment: Fragment) {
-
         Handler().post {
             val fragmentManager = this.supportFragmentManager
             val transaction = fragmentManager.beginTransaction()
@@ -98,7 +93,6 @@ class UserLogsActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.menu_toolbar, menu)
         return super.onCreateOptionsMenu(menu)
     }
@@ -108,10 +102,6 @@ class UserLogsActivity : AppCompatActivity() {
             android.R.id.home -> {
                 finish()
                 return true
-            }
-
-            R.id.item_menu_location -> {
-
             }
 
             R.id.item_menu_sort -> {

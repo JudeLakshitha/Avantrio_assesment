@@ -19,17 +19,13 @@ class CommonHelper {
         var errorMessage = ""
         if (error is NetworkError) {
             errorMessage = "Cannot connect to Service.\nPlease check your \nconnection!"
-
         } else if (error is ServerError) {
             errorMessage = "Server could not \nbe found. Please try again \nafter some time!"
-
         } else if (error is AuthFailureError) {
             errorMessage = "Authentication Failed! \nPlease login again!"
-
         } else {
             errorMessage = "Service is not working.\nPlease try again!"
         }
-
         return errorMessage
     }
 }
